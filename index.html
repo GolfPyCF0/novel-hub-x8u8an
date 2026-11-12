@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>📚 ชั้นหนังสือรวมทุกเรื่อง - คลังนิยายแปลส่วนตัว</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --card-hover: #263449;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --border: #334155;
+    }
+    body.theme-sepia {
+      --bg: #f4ecd8;
+      --card: #fdf6e3;
+      --card-hover: #f7eed6;
+      --text: #3b2f2f;
+      --muted: #7c6f64;
+      --accent: #b45309;
+      --border: #e6d8b5;
+    }
+    body.theme-light {
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --card-hover: #f8fafc;
+      --text: #1e293b;
+      --muted: #64748b;
+      --accent: #0284c7;
+      --border: #cbd5e1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Sarabun", "Tahoma", "Segoe UI", sans-serif;
+      transition: background 0.2s, color 0.2s;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--accent);
+    }
+    .stats-pill {
+      font-size: 13px;
+      color: var(--muted);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-weight: normal;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    input.search-box {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 14px;
+      min-width: 210px;
+    }
+    button {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 11px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    button.active {
+      background: var(--accent);
+      color: #020617;
+      font-weight: bold;
+      border-color: var(--accent);
+    }
+    main {
+      max-width: 1120px;
+      margin: 28px auto 60px;
+      padding: 0 20px;
+    }
+    .shelf-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 22px;
+    }
+    .novel-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.16);
+      transition: transform 0.16s, border-color 0.16s;
+    }
+    .novel-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+    .cover-wrap {
+      position: relative;
+      height: 250px;
+      background: #090d16;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-decoration: none;
+    }
+    .cover-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #090d16;
+      transition: transform 0.25s;
+    }
+    .novel-card:hover .cover-wrap img {
+      transform: scale(1.03);
+    }
+    .no-cover {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .badge-chapters {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(15, 23, 42, 0.88);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+      backdrop-filter: blur(4px);
+    }
+    .card-body {
+      padding: 18px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 8px;
+    }
+    .novel-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--accent);
+      text-decoration: none;
+      line-height: 1.4;
+    }
+    .novel-title:hover {
+      text-decoration: underline;
+    }
+    .meta-row {
+      display: flex;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .latest-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 13px;
+      line-height: 1.45;
+      margin-top: 2px;
+    }
+    .updated-text {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: auto;
+      padding-top: 4px;
+    }
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .btn-primary, .btn-secondary {
+      flex: 1;
+      text-align: center;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #020617;
+    }
+    .btn-secondary {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-primary:hover, .btn-secondary:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span>📚 ชั้นหนังสือรวมทุกเรื่อง</span>
+      <span class="stats-pill">2 เรื่อง • รวม 15 ตอน</span>
+    </div>
+    <div class="controls">
+      <input type="text" class="search-box" id="searchBox" placeholder="🔍 ค้นหาชื่อเรื่อง..." oninput="filterNovels(this.value)" />
+      <button onclick="setTheme('dark')" id="tDark" class="active">🌙 มืด</button>
+      <button onclick="setTheme('sepia')" id="tSepia">📜 ถนอมสายตา</button>
+      <button onclick="setTheme('light')" id="tLight">☀️ สว่าง</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="shelf-grid" id="shelfGrid">
+
+      <div class="novel-card" data-title="บันทึกบำเพ็ญเพียรของคนตัดฟืนผู้ไม่แก่เฒ่า (lee hyun) lee_hyun_xianxia">
+        <a class="cover-wrap" href="lee_hyun_xianxia/index.html">
+          <div class="no-cover"><span style="font-size:48px;">📖</span><span>คลังนิยายแปลไทย</span></div>
+          <span class="badge-chapters">แปลแล้ว 4 ตอน</span>
+        </a>
+        <div class="card-body">
+          <a class="novel-title" href="lee_hyun_xianxia/index.html">บันทึกบำเพ็ญเพียรของคนตัดฟืนผู้ไม่แก่เฒ่า (Lee Hyun)</a>
+          <div class="meta-row">
+            <span>📘 1 เล่ม</span>
+            <span>•</span>
+            <span>🖼️ 0 ภาพประกอบ</span>
+          </div>
+          <div class="latest-box">
+            <strong>ตอนล่าสุด:</strong> บทที่ 4
+          </div>
+          <div class="updated-text">🕒 อัปเดตล่าสุด: 2026-11-12 21:58</div>
+          <div class="card-actions">
+            <a class="btn-primary" href="lee_hyun_xianxia/index.html">📖 เปิดอ่านนิยาย</a>
+            <a class="btn-secondary" href="lee_hyun_xianxia/นิยาย_อีฮยอน.epub" download>📥 โหลด EPUB</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="novel-card" data-title="ตราประทับเกียรติยศ (rakuin no monshou) rakuin_no_monshou">
+        <a class="cover-wrap" href="rakuin_no_monshou/index.html">
+          <img src="rakuin_no_monshou/illustrations/เล่ม 1/00_cover.jpg" alt="ตราประทับเกียรติยศ (Rakuin no Monshou)" loading="lazy" />
+          <span class="badge-chapters">แปลแล้ว 11 ตอน</span>
+        </a>
+        <div class="card-body">
+          <a class="novel-title" href="rakuin_no_monshou/index.html">ตราประทับเกียรติยศ (Rakuin no Monshou)</a>
+          <div class="meta-row">
+            <span>📘 1 เล่ม</span>
+            <span>•</span>
+            <span>🖼️ 21 ภาพประกอบ</span>
+          </div>
+          <div class="latest-box">
+            <strong>ตอนล่าสุด:</strong> บทที่ 4.1: ณ หุบเขาเซริน (1)
+          </div>
+          <div class="updated-text">🕒 อัปเดตล่าสุด: 2026-11-13 00:31</div>
+          <div class="card-actions">
+            <a class="btn-primary" href="rakuin_no_monshou/index.html">📖 เปิดอ่านนิยาย</a>
+            <a class="btn-secondary" href="rakuin_no_monshou/นิยาย_ตราประทับเกียรติยศ.epub" download>📥 โหลด EPUB</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    let theme = localStorage.getItem("novel_hub_theme") || "dark";
+    function setTheme(t) {
+      theme = t;
+      document.body.classList.remove("theme-sepia", "theme-light");
+      if (t !== "dark") document.body.classList.add("theme-" + t);
+      document.getElementById("tDark").classList.toggle("active", t === "dark");
+      document.getElementById("tSepia").classList.toggle("active", t === "sepia");
+      document.getElementById("tLight").classList.toggle("active", t === "light");
+      localStorage.setItem("novel_hub_theme", t);
+    }
+    function filterNovels(q) {
+      const query = (q || "").trim().toLowerCase();
+      document.querySelectorAll(".novel-card").forEach(card => {
+        const hay = card.getAttribute("data-title") || "";
+        card.style.display = hay.includes(query) ? "" : "none";
+      });
+    }
+    setTheme(theme);
+  </script>
+
+  <div id="pinGateOverlay" style="display:none; position:fixed; inset:0; z-index:99999; background:#0f172a; color:#e2e8f0; flex-direction:column; align-items:center; justify-content:center; padding:20px; font-family:'Sarabun','Segoe UI',sans-serif;">
+    <div style="background:#1e293b; border:1px solid #334155; border-radius:14px; padding:28px 26px; max-width:340px; width:100%; text-align:center; box-shadow:0 10px 30px rgba(0,0,0,0.4);">
+      <div style="font-size:38px; margin-bottom:8px;">🔒</div>
+      <div style="font-size:18px; font-weight:bold; color:#38bdf8; margin-bottom:6px;">คลังนิยายส่วนตัว</div>
+      <div style="font-size:13px; color:#94a3b8; margin-bottom:16px;">กรอกรหัส PIN เพื่อเข้าอ่าน (จำรหัสอัตโนมัติในเครื่องนี้)</div>
+      <input id="pinGateInput" type="password" inputmode="numeric" placeholder="รหัส PIN..." style="width:100%; padding:10px 12px; font-size:18px; text-align:center; border-radius:8px; border:1px solid #334155; background:#0f172a; color:#f8fafc; margin-bottom:12px;" onkeydown="if(event.key==='Enter') checkPinGate()" />
+      <button onclick="checkPinGate()" style="width:100%; padding:10px; font-size:15px; font-weight:bold; border-radius:8px; border:none; background:#38bdf8; color:#020617; cursor:pointer;">เข้าสู่คลังนิยาย</button>
+      <div id="pinGateErr" style="color:#f87171; font-size:13px; margin-top:10px; display:none;">❌ รหัส PIN ไม่ถูกต้อง</div>
+    </div>
+  </div>
+  <script>
+    (function() {
+      const EXPECTED_PIN = "0909";
+      if (localStorage.getItem("novel_hub_pin_ok") !== EXPECTED_PIN) {
+        const gate = document.getElementById("pinGateOverlay");
+        if (gate) gate.style.display = "flex";
+      }
+      window.checkPinGate = function() {
+        const val = (document.getElementById("pinGateInput").value || "").trim();
+        if (val === EXPECTED_PIN) {
+          localStorage.setItem("novel_hub_pin_ok", EXPECTED_PIN);
+          document.getElementById("pinGateOverlay").style.display = "none";
+        } else {
+          document.getElementById("pinGateErr").style.display = "block";
+        }
+      };
+    })();
+  </script>
+</body>
+</html>
