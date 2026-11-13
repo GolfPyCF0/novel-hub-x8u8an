@@ -190,6 +190,16 @@
       font-size: 13px;
       color: var(--muted);
     }
+    .reading-progress-box {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid var(--accent);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 13px;
+      line-height: 1.45;
+      margin-top: 2px;
+    }
     .latest-box {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -251,7 +261,7 @@
   <main>
     <div class="shelf-grid" id="shelfGrid">
 
-      <div class="novel-card" data-title="บันทึกบำเพ็ญเพียรของคนตัดฟืนผู้ไม่แก่เฒ่า (lee hyun) lee_hyun_xianxia">
+      <div class="novel-card" data-title="บันทึกบำเพ็ญเพียรของคนตัดฟืนผู้ไม่แก่เฒ่า (lee hyun) lee_hyun_xianxia" data-slug="lee_hyun_xianxia" data-total="7">
         <a class="cover-wrap" href="lee_hyun_xianxia/index.html">
           <img src="lee_hyun_xianxia/illustrations/เล่ม 1/1.jpg" alt="บันทึกบำเพ็ญเพียรของคนตัดฟืนผู้ไม่แก่เฒ่า (Lee Hyun)" loading="lazy" />
           <span class="badge-chapters">แปลแล้ว 7 ตอน</span>
@@ -263,18 +273,19 @@
             <span>•</span>
             <span>🖼️ 2 ภาพประกอบ</span>
           </div>
+          <div class="reading-progress-box" data-prog-box="lee_hyun_xianxia" style="display:none;"></div>
           <div class="latest-box">
             <strong>ตอนล่าสุด:</strong> บทที่ 7
           </div>
           <div class="updated-text">🕒 อัปเดตล่าสุด: 2026-11-13 01:50</div>
           <div class="card-actions">
-            <a class="btn-primary" href="lee_hyun_xianxia/index.html">📖 เปิดอ่านนิยาย</a>
+            <a class="btn-primary" data-read-btn="lee_hyun_xianxia" href="lee_hyun_xianxia/index.html">📖 เปิดอ่านนิยาย</a>
             <a class="btn-secondary" href="lee_hyun_xianxia/นิยาย_อีฮยอน.epub" download>📥 โหลด EPUB</a>
           </div>
         </div>
       </div>
 
-      <div class="novel-card" data-title="ตราประทับเกียรติยศ (rakuin no monshou) rakuin_no_monshou">
+      <div class="novel-card" data-title="ตราประทับเกียรติยศ (rakuin no monshou) rakuin_no_monshou" data-slug="rakuin_no_monshou" data-total="11">
         <a class="cover-wrap" href="rakuin_no_monshou/index.html">
           <img src="rakuin_no_monshou/illustrations/เล่ม 1/00_cover.jpg" alt="ตราประทับเกียรติยศ (Rakuin no Monshou)" loading="lazy" />
           <span class="badge-chapters">แปลแล้ว 11 ตอน</span>
@@ -286,18 +297,19 @@
             <span>•</span>
             <span>🖼️ 21 ภาพประกอบ</span>
           </div>
+          <div class="reading-progress-box" data-prog-box="rakuin_no_monshou" style="display:none;"></div>
           <div class="latest-box">
             <strong>ตอนล่าสุด:</strong> บทที่ 4.1: ณ หุบเขาเซริน (1)
           </div>
           <div class="updated-text">🕒 อัปเดตล่าสุด: 2026-11-13 00:31</div>
           <div class="card-actions">
-            <a class="btn-primary" href="rakuin_no_monshou/index.html">📖 เปิดอ่านนิยาย</a>
+            <a class="btn-primary" data-read-btn="rakuin_no_monshou" href="rakuin_no_monshou/index.html">📖 เปิดอ่านนิยาย</a>
             <a class="btn-secondary" href="rakuin_no_monshou/นิยาย_ตราประทับเกียรติยศ.epub" download>📥 โหลด EPUB</a>
           </div>
         </div>
       </div>
 
-      <div class="novel-card" data-title="30 ปีผ่านไปนับจากบทนำ (30 years have passed since the prologue) thirty_years_prologue">
+      <div class="novel-card" data-title="30 ปีผ่านไปนับจากบทนำ (30 years have passed since the prologue) thirty_years_prologue" data-slug="thirty_years_prologue" data-total="36">
         <a class="cover-wrap" href="thirty_years_prologue/index.html">
           <img src="thirty_years_prologue/illustrations/เล่ม 1/1.jpg" alt="30 ปีผ่านไปนับจากบทนำ (30 Years Have Passed Since the Prologue)" loading="lazy" />
           <span class="badge-chapters">แปลแล้ว 36 ตอน</span>
@@ -309,12 +321,13 @@
             <span>•</span>
             <span>🖼️ 1 ภาพประกอบ</span>
           </div>
+          <div class="reading-progress-box" data-prog-box="thirty_years_prologue" style="display:none;"></div>
           <div class="latest-box">
             <strong>ตอนล่าสุด:</strong> บทที่ 36
           </div>
           <div class="updated-text">🕒 อัปเดตล่าสุด: 2026-11-13 20:02</div>
           <div class="card-actions">
-            <a class="btn-primary" href="thirty_years_prologue/index.html">📖 เปิดอ่านนิยาย</a>
+            <a class="btn-primary" data-read-btn="thirty_years_prologue" href="thirty_years_prologue/index.html">📖 เปิดอ่านนิยาย</a>
             <a class="btn-secondary" href="thirty_years_prologue/นิยาย_thirty_years_prologue.epub" download>📥 โหลด EPUB</a>
           </div>
         </div>
@@ -340,7 +353,31 @@
         card.style.display = hay.includes(query) ? "" : "none";
       });
     }
+    function updateReadingProgressCards() {
+      document.querySelectorAll(".novel-card[data-slug]").forEach(card => {
+        const slug = card.getAttribute("data-slug");
+        const total = parseInt(card.getAttribute("data-total") || "0", 10);
+        const savedIdxRaw = localStorage.getItem(slug + "_ch_idx");
+        if (savedIdxRaw === null || total <= 0) return;
+        const idx = parseInt(savedIdxRaw, 10);
+        if (isNaN(idx) || idx < 0) return;
+        const chNum = Math.min(total, idx + 1);
+        const savedTitle = localStorage.getItem(slug + "_ch_title") || "";
+        const box = card.querySelector(`[data-prog-box="${slug}"]`);
+        const btn = card.querySelector(`[data-read-btn="${slug}"]`);
+        if (box) {
+          box.textContent = savedTitle
+            ? `📌 อ่านค้าง: ตอนที่ ${chNum}/${total} — ${savedTitle}`
+            : `📌 อ่านค้าง: ตอนที่ ${chNum} จาก ${total} ตอน`;
+          box.style.display = "block";
+        }
+        if (btn) {
+          btn.textContent = `▶️ อ่านต่อ (ตอนที่ ${chNum})`;
+        }
+      });
+    }
     setTheme(theme);
+    updateReadingProgressCards();
   </script>
 
   <div id="pinGateOverlay" style="display:none; position:fixed; inset:0; z-index:99999; background:#0f172a; color:#e2e8f0; flex-direction:column; align-items:center; justify-content:center; padding:20px; font-family:'Sarabun','Segoe UI',sans-serif;">

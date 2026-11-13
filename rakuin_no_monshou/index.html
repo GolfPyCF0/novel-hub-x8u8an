@@ -325,9 +325,26 @@
       align-items: center;
       gap: 5px;
     }
+    .read-progress-wrap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      z-index: 90;
+      background: transparent;
+      pointer-events: none;
+    }
+    .read-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      transition: width 0.08s linear;
+    }
   </style>
 </head>
 <body>
+  <div class="read-progress-wrap"><div class="read-progress-bar" id="readProgressBar"></div></div>
   <button class="floating-menu-btn" id="floatingMenuBtn" onclick="toggleMenu(false)">☰ เมนู</button>
   <header>
     <div class="brand">
@@ -681,6 +698,8 @@ window.NOVEL_DATA = {
       document.getElementById("btnNextBottom").disabled = !hasNext;
 
       localStorage.setItem(STORAGE_PREFIX + "_ch_idx", String(currentIdx));
+      localStorage.setItem(STORAGE_PREFIX + "_ch_title", ch.title || "");
+      updateScrollProgress();
     }
 
     function selectVolume(volName) {
@@ -693,6 +712,7 @@ window.NOVEL_DATA = {
 
     function selectChapter(idx) {
       currentIdx = parseInt(idx, 10);
+      localStorage.setItem(STORAGE_PREFIX + "_scroll_y", "0");
       render();
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -842,12 +862,36 @@ window.NOVEL_DATA = {
       }
     });
 
+    function updateScrollProgress() {
+      const docEl = document.documentElement;
+      const maxScroll = Math.max(1, docEl.scrollHeight - docEl.clientHeight);
+      const pct = Math.min(100, Math.max(0, (window.scrollY / maxScroll) * 100));
+      const bar = document.getElementById("readProgressBar");
+      if (bar) bar.style.width = pct.toFixed(1) + "%";
+    }
+
+    let scrollSaveTimer = null;
+    window.addEventListener("scroll", () => {
+      updateScrollProgress();
+      if (scrollSaveTimer) clearTimeout(scrollSaveTimer);
+      scrollSaveTimer = setTimeout(() => {
+        localStorage.setItem(STORAGE_PREFIX + "_scroll_y", String(Math.round(window.scrollY)));
+      }, 120);
+    }, { passive: true });
+
     document.documentElement.style.setProperty("--font-size", fontSize + "px");
     setTheme(theme);
     if (localStorage.getItem("novel_reader_menu_hidden") === "1") {
       toggleMenu(true);
     }
+    const initialSavedScroll = parseInt(localStorage.getItem(STORAGE_PREFIX + "_scroll_y") || "0", 10);
     render();
+    if (initialSavedScroll > 0) {
+      requestAnimationFrame(() => {
+        window.scrollTo(0, initialSavedScroll);
+        updateScrollProgress();
+      });
+    }
   </script>
 
   <div id="pinGateOverlay" style="display:none; position:fixed; inset:0; z-index:99999; background:#0f172a; color:#e2e8f0; flex-direction:column; align-items:center; justify-content:center; padding:20px; font-family:'Sarabun','Segoe UI',sans-serif;">
