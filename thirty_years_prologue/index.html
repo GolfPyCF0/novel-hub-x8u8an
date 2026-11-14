@@ -1050,11 +1050,6 @@ window.NOVEL_DATA = {
       }
     }
 
-    const COMMENT_AVATAR_COLORS = [
-      "#0284c7", "#7c3aed", "#db2777", "#059669", "#d97706",
-      "#dc2626", "#4f46e5", "#0d9488", "#9333ea", "#ea580c"
-    ];
-
     function escapeHtml(str) {
       return String(str)
         .replace(/&/g, "&amp;")
@@ -1062,6 +1057,11 @@ window.NOVEL_DATA = {
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;");
     }
+
+    const COMMENT_AVATAR_COLORS = [
+      "#0284c7", "#7c3aed", "#db2777", "#059669", "#d97706",
+      "#dc2626", "#4f46e5", "#0d9488", "#9333ea", "#ea580c"
+    ];
 
     function getAvatarColor(name) {
       let hash = 0;
